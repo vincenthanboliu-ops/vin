@@ -1,0 +1,25 @@
+print("🏪 Welcome to Vincent's Sport Store 🏪")
+items = ["Badminton racket 🏸", "Baseball bat ⚾", "Hockey stick 🏒", "Basketball 🏀"]
+prices = [60, 50, 70, 40]
+total = 0
+while True:
+for item in items:
+    print(str(number) + ". " + item)
+    number += 1
+    item = input("\nWhat do you want to buy?: ")
+    how_many = int(input("How many do you want to buy?: "))
+    unit_price = float(input("How much does it cost (per item)?: $"))
+    cost = how_many * unit_price
+    total = total + cost
+    print("You bought " + str(how_many) + " " + item + "(s) for $" + str(cost))
+    buy_again = input("\nWould you like to buy something else? (yes/no): ")
+    if buy_again != "yes":
+        break
+student = input("\nAre you a Vincents Sport Store member? (yes/no): ")
+if student == "yes":
+    total = total * 0.8
+    print("👌💵💰 Here's your 20% student discount!")
+else:
+    print("😥 No discount for you. Sorry!")
+print("\nYour final total is: $" + str(total))
+print("Thanks for shopping at the Sports Store! 👋")
