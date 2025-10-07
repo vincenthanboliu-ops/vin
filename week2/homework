@@ -19,4 +19,4 @@ while not correct:
         print("You got it! The number was", secret_number)
         print("It took you", attempts, "tries")
         correct = True
-print("come play soon")
+print("Hope you play my number guessing game soon!")
