@@ -1,1 +1,22 @@
-print("hello")
+import random
+print("Welcome to the Number Guessing Game")
+print("I'm thinking of a number between 1 and 25")
+secret_number = random.randint(1, 25)
+attempts = 0
+correct = False
+while not correct:
+    guess = input("Take a guess: ")
+    if guess.isdigit() == False:
+        print("Error! Please type a whole number (no letters or symbols)")
+        continue
+    guess = int(guess)
+    attempts = attempts + 1
+    if guess < secret_number:
+        print("Too low! Try again")
+    elif guess > secret_number:
+        print("Too high! Try again")
+    else:
+        print("You got it! The number was", secret_number)
+        print("It took you", attempts, "tries")
+        correct = True
+print("come play soon")
