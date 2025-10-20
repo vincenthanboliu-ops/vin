@@ -1,0 +1,49 @@
+#makes sure to randomize the secret number
+import random
+#part if you want to play again
+play_again = "yes"
+while play_again == "yes":
+    print("Welcome to the Number Guessing Game")
+    #What is your range?
+    low = input("Enter the lowest number: ")
+    high = input("Enter the highest number: ")
+    #if you didnt type out a number/integer
+    if low.isdigit() == False or high.isdigit() == False:
+        print("Error! Please type whole numbers only")
+        #process starts
+    else:
+        low = int(low)
+        high = int(high)
+        #generates the secret number
+        secret_number = random.randint(low, high)
+        attempts = 5
+        correct = False
+        #guessing the number and you have 5 attempts
+        print("I'm thinking of a number between", low, "and", high)
+        print("You have 5 attempts")
+        while attempts > 0 and correct == False:
+            guess = input("Take a guess: ")
+            #if you didnt type a number/integer
+            if guess.isdigit() == False:
+                print("Error! Please type a whole number")
+                continue
+            guess = int(guess)
+            attempts = attempts - 1
+            #if your guess was smaller than the secret number
+            if guess < secret_number:
+                print("Too small!")
+                #if your number was bigger than the secret number
+            elif guess > secret_number:
+                print("Too big!")
+                #you got the correct secret number
+            else:
+                print("You got it! The number was", secret_number)
+                correct = True
+                break
+            #if you didnt complete it in 5 attempts
+            if attempts > 0 and correct == False:
+                print("You have", attempts, "attempts left")
+                #asks if you want to play again?
+        if correct == False:
+            print("You lose! The number was", secret_number)
+    play_again = input("Do you want to play again? Type yes or no: ")
