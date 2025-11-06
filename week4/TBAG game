@@ -1,0 +1,63 @@
+import random
+questions = [
+    "What is 3 + 5? ",
+    "What is 10 - 6? ",
+    "What is 4 x 2? ",
+    "What is 12 ÷ 3? ",
+    "What is 7 + 6? ",
+    "What is 9 - 3? ",
+    "What is 6 x 3? ",
+    "What is 15 ÷ 5? ",
+    "What is 8 + 9? "
+]
+answers = [
+    "8",
+    "4",
+    "8",
+    "4",
+    "13",
+    "6",
+    "18",
+    "3",
+    "17"
+]
+hard_questions = [4, 6, 8]
+lives = 3
+asked_questions = []
+def intro():
+    print("Welcome to Vincent's tbag game!")
+    print("\nInstructions:")
+    print("1. Type only the number as your answer.")
+    print("2. You have 3 lives.")
+    print("3. harder questions will give you an extra life.")
+    print("4. Please dont rage and have fun!\n")
+    print("Now we can start the game!\n")
+
+intro()
+step = 1
+while len(asked_questions) < len(questions) and lives > 0:
+    print(f"Question {step}:")
+    print(f"Lives remaining: {lives}")
+    
+    n = random.choice([i for i in range(len(questions)) if i not in asked_questions])
+    asked_questions.append(n)
+    
+    answer = input(questions[n]).strip()
+    
+    if answer == answers[n]:
+        print("Correct!")
+        if n in hard_questions:
+            lives += 1
+            print("You gained 1 more life!")
+    else:
+        lives -= 1
+        print(" You got it wrong!")
+        print(f"The correct answer was: {answers[n]}")
+    
+    print(f"Lives left: {lives}\n")
+    step += 1
+
+if lives == 0:
+    print("You ran out of your lives! Try to win next time.")
+else:
+    print("Congrats, you finished my TBAG game!")
