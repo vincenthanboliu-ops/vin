@@ -1,0 +1,12 @@
+weather = [
+    ["Monday", 9, 2],
+    ["Tuesday", 10, 3],
+    ["Wednesday", 8, 1],
+    ["Thursday", 7, 0],
+    ["Friday", 6, -1],
+    ["Saturday", 5, -2],
+    ["Sunday", 4, -3]
+]
+print("7-Day weather forecast for Richmond Hill, Canada:")
+for day in weather:
+    print(day[0] + ": High =", str(day[1]) + "°C, Low =", str(day[2]) + "°C")
