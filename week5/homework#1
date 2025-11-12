@@ -1,0 +1,51 @@
+import random
+questions = [
+    "True/False: Europe has no deserts.",
+    "How many seasons does Friends have?",
+    "What is the largest organ?",
+    "What is the most copied link on the internet? (just write one word)",
+    "True/False: Albert Einstein had trouble with mathematics in school.",
+    "How many hearts does an octopus have?"
+]
+answers = [
+    ["true"],
+    ["10", "ten"],
+    ["skin"],
+    ["rickroll"],
+    ["false"],
+    ["3", "three"]
+]
+def intro():
+    print("Welcome to the TBAG Quiz Game!")
+    print("Rules:")
+    print(" - You have 3 lives.")
+    print(" - Answers are not case-sensitive.")
+    print(" - Try to get all questions right!\n")
+def ask_question(q_index):
+    user_answer = input(questions[q_index] + " ").strip().lower()
+    correct_answers = [a.lower() for a in answers[q_index]]
+    if user_answer in correct_answers:
+        print("✅ Correct!\n")
+        return True
+    else:
+        print("❌ Wrong! The correct answer was one of:", ', '.join(answers[q_index]), "\n")
+        return False
+def play_game():
+    lives = 3
+    asked = []
+    step = 1
+    while lives > 0 and len(asked) < len(questions):
+        print(f"Step {step}: Lives remaining = {lives}")
+        q = random.choice([i for i in range(len(questions)) if i not in asked])
+        asked.append(q)
+        if not ask_question(q):
+            lives -= 1
+        step += 1
+    if lives == 0:
+        print("💀 You ran out of lives. Game Over!")
+    else:
+        print("🏆 You completed the TBAG! Congratulations!")
+def main():
+    intro()
+    play_game()
+main()
