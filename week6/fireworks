@@ -5,6 +5,7 @@ t = turtle.Turtle()
 t.speed(0)
 
 screen = turtle.Screen()
+screen.setup(800, 600)
 screen.bgcolor("black")
 
 star = turtle.Turtle()
@@ -14,13 +15,13 @@ star.color("white")
 star.penup()
 
 for _ in range(60):
-    x = random.randint(-300, 300)
-    y = random.randint(0, 300)
+    x = random.randint(-380, 380)
+    y = random.randint(0, 280)
     star.goto(x, y)
     star.dot(random.randint(2, 4))
 
 t.penup()
-t.goto(-100, 0)
+t.goto(-100, -300) 
 t.pendown()
 t.fillcolor("red")
 t.begin_fill()
@@ -32,11 +33,11 @@ t.end_fill()
 def launch_firework(curved=False):
     t.penup()
     start_x = random.randint(-100, 100)
-    start_y = -140
+    start_y = -300
     t.goto(start_x, start_y)
     t.pendown()
     t.pensize(2)
-    t.color("white")
+    t.color("gold")
     t.setheading(90)
 
     target_height = random.randint(40, 80)
