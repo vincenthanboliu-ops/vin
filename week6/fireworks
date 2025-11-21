@@ -20,12 +20,12 @@ for _ in range(60):
     star.dot(random.randint(2, 4))
 
 t.penup()
-t.goto(-150, 150)
+t.goto(-100, 0)
 t.pendown()
 t.fillcolor("red")
 t.begin_fill()
 for _ in range(4):
-    t.forward(300)
+    t.forward(200)
     t.right(90)
 t.end_fill()
 
@@ -39,30 +39,29 @@ def launch_firework(curved=False):
     t.color("white")
     t.setheading(90)
 
-    target_height = random.randint(20, 50)
+    target_height = random.randint(40, 80)
 
-    if not curved:
+    if curved:
+        tilt = random.choice([-15, 15])
         for _ in range(target_height):
+            t.setheading(90 + tilt)
             t.forward(10)
     else:
-        curve = random.choice([-1, 1]) * random.uniform(0.5, 1.3)
-        for step in range(target_height):
+        for _ in range(target_height):
             t.forward(10)
-            t.setheading(90 + curve * step)
 
-    pellets = 30
+    pellets = 40
     angle = 360 / pellets
+    explosion_size = 100
+
     for _ in range(pellets):
         t.color(random.random(), random.random(), random.random())
-        t.forward(60)
-        t.backward(60)
+        t.forward(explosion_size)
+        t.backward(explosion_size)
         t.right(angle)
 
 for i in range(6):
-    if i % 2 == 0:
-        launch_firework(curved=True)
-    else:
-        launch_firework(curved=False)
+    launch_firework(curved=(i % 2 == 0))
 
 t.hideturtle()
 turtle.done()
