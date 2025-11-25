@@ -1,0 +1,14 @@
+import turtle
+
+t = turtle.Turtle()
+t.speed(0)
+t.color("red")
+t.width(1)
+
+radius = 1
+for i in range(200):
+    t.circle(radius)
+    t.left(5)
+    radius += 1
+
+turtle.done()
