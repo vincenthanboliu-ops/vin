@@ -1,0 +1,37 @@
+import pygame
+pygame.init()
+
+WIDTH, HEIGHT = 800, 400
+win = pygame.display.set_mode((WIDTH, HEIGHT))
+pygame.display.set_caption("Stage 1 - Auto Moving Boxes")
+
+clock = pygame.time.Clock()
+
+green_box = pygame.Rect(50, 100, 40, 40)
+pink_box = pygame.Rect(700, 200, 40, 40)
+green_speed = 3
+pink_speed = -3
+
+running = True
+while running:
+    clock.tick(60)
+
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+
+    green_box.x += green_speed
+    pink_box.x += pink_speed
+
+    if green_box.x > WIDTH:
+        green_box.x = -40
+    if pink_box.x < -40:
+        pink_box.x = WIDTH
+
+    win.fill((20, 20, 20))
+    pygame.draw.rect(win, (0, 255, 0), green_box)
+    pygame.draw.rect(win, (255, 105, 180), pink_box)
+
+    pygame.display.update()
+
+pygame.quit()
