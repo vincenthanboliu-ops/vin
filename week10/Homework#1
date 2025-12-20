@@ -1,0 +1,42 @@
+import pygame
+import sys
+
+pygame.init()
+
+WIDTH, HEIGHT = 600, 400
+screen = pygame.display.set_mode((WIDTH, HEIGHT))
+pygame.display.set_caption("WASD Movement")
+
+clock = pygame.time.Clock()
+
+box_size = 40
+x, y = WIDTH // 2, HEIGHT // 2
+speed = 5
+
+running = True
+while running:
+    clock.tick(60)
+
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+
+    keys = pygame.key.get_pressed()
+    if keys[pygame.K_w]:
+        y -= speed
+    if keys[pygame.K_s]:
+        y += speed
+    if keys[pygame.K_a]:
+        x -= speed
+    if keys[pygame.K_d]:
+        x += speed
+
+    x = max(0, min(WIDTH - box_size, x))
+    y = max(0, min(HEIGHT - box_size, y))
+
+    screen.fill((30, 30, 30))
+    pygame.draw.rect(screen, (0, 200, 255), (x, y, box_size, box_size))
+    pygame.display.flip()
+
+pygame.quit()
+sys.exit()
