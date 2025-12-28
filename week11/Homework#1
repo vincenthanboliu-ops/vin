@@ -1,0 +1,68 @@
+import pygame
+import sys
+
+pygame.init()
+
+WIDTH, HEIGHT = 800, 600
+screen = pygame.display.set_mode((WIDTH, HEIGHT))
+pygame.display.set_caption("Box Collision Example")
+
+clock = pygame.time.Clock()
+
+GREEN = (0, 255, 0)
+PINK = (255, 105, 180)
+BLUE = (0, 150, 255)
+BLACK = (0, 0, 0)
+WHITE = (255, 255, 255)
+
+BOX_SIZE = 100
+
+green_rect = pygame.Rect(
+    WIDTH // 2 - BOX_SIZE // 2,
+    HEIGHT // 2 - BOX_SIZE // 2,
+    BOX_SIZE,
+    BOX_SIZE
+)
+
+pink_rect = pygame.Rect(100, 100, BOX_SIZE, BOX_SIZE)
+speed = 5
+
+font = pygame.font.SysFont(None, 40)
+
+while True:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            sys.exit()
+
+    keys = pygame.key.get_pressed()
+    if keys[pygame.K_LEFT]:
+        pink_rect.x -= speed
+    if keys[pygame.K_RIGHT]:
+        pink_rect.x += speed
+    if keys[pygame.K_UP]:
+        pink_rect.y -= speed
+    if keys[pygame.K_DOWN]:
+        pink_rect.y += speed
+
+    overlapping = pink_rect.colliderect(green_rect)
+
+    screen.fill(BLACK)
+
+    pygame.draw.rect(
+        screen,
+        BLUE if overlapping else GREEN,
+        green_rect
+    )
+
+    pygame.draw.rect(screen, PINK, pink_rect)
+
+    if overlapping:
+        text = font.render("OVERLAPPING", True, WHITE)
+        screen.blit(
+            text,
+            (WIDTH // 2 - text.get_width() // 2, 50)
+        )
+
+    pygame.display.flip()
+    clock.tick(60)
