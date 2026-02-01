@@ -1,0 +1,125 @@
+import pygame, sys
+
+pygame.init()
+T = 50
+screen = pygame.display.set_mode((800, 600))
+clock = pygame.time.Clock()
+font = pygame.font.SysFont(None, 48)
+
+SIDEBAR_X = 740
+IND_SIZE = 30
+IND_GAP = 10
+
+levels = [
+    [
+        [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+        [1,0,0,0,0,1,0,0,0,0,0,1,0,0,0,1],
+        [1,0,1,1,0,1,0,1,1,1,0,1,0,1,0,1],
+        [1,0,1,0,0,0,0,0,0,1,0,0,0,1,0,1],
+        [1,0,1,0,1,1,1,1,0,1,1,1,0,1,0,1],
+        [1,0,0,0,0,0,0,1,0,0,0,0,0,1,0,1],
+        [1,1,1,1,1,1,0,1,1,1,1,1,0,1,0,1],
+        [1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1],
+        [1,0,1,1,1,1,1,1,1,1,0,1,1,1,2,1],
+        [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
+    ],
+    [
+        [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+        [1,0,0,0,0,0,1,0,0,0,0,0,0,0,2,1],
+        [1,0,1,1,1,0,1,0,1,1,1,1,1,0,1,1],
+        [1,0,1,0,0,0,0,0,0,0,0,0,1,0,0,1],
+        [1,0,1,0,1,1,1,1,1,1,1,0,1,1,0,1],
+        [1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,1],
+        [1,1,1,1,1,1,1,1,1,0,1,1,1,1,0,1],
+        [1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1],
+        [1,0,1,1,1,1,1,0,1,1,1,1,1,1,0,1],
+        [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
+    ],
+    [
+        [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+        [1,0,0,0,0,0,0,0,0,1,0,0,0,0,2,1],
+        [1,0,1,1,1,1,1,1,0,1,0,1,1,1,0,1],
+        [1,0,1,0,0,0,0,1,0,0,0,1,0,0,0,1],
+        [1,0,1,0,1,1,0,1,1,1,0,1,0,1,0,1],
+        [1,0,0,0,1,0,0,0,0,0,0,1,0,1,0,1],
+        [1,1,1,0,1,0,1,1,1,1,0,1,0,1,0,1],
+        [1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1],
+        [1,0,1,1,1,1,1,0,1,1,1,1,1,1,0,1],
+        [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
+    ],
+    [
+        [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+        [1,0,0,0,0,0,0,1,0,0,0,0,0,0,2,1],
+        [1,0,1,1,1,1,0,1,0,1,1,1,1,0,1,1],
+        [1,0,1,0,0,0,0,0,0,0,0,0,1,0,0,1],
+        [1,0,1,0,1,1,1,1,1,1,1,0,1,1,0,1],
+        [1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,1],
+        [1,1,1,1,1,1,1,1,1,0,1,1,1,1,0,1],
+        [1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1],
+        [1,0,1,1,1,1,1,0,1,1,1,1,1,1,0,1],
+        [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
+    ]
+]
+
+lvl = 0
+maze = levels[lvl]
+player = pygame.Rect(T + 8, T + 8, T - 16, T - 16)
+
+def hit(v):
+    for r in range(len(maze)):
+        for c in range(len(maze[0])):
+            if maze[r][c] == v:
+                if player.colliderect(pygame.Rect(c*T, r*T, T, T)):
+                    return True
+    return False
+
+while True:
+    clock.tick(60)
+    for e in pygame.event.get():
+        if e.type == pygame.QUIT:
+            pygame.quit()
+            sys.exit()
+
+    k = pygame.key.get_pressed()
+    player.move_ip((k[pygame.K_RIGHT] - k[pygame.K_LEFT]) * 4,
+                   (k[pygame.K_DOWN] - k[pygame.K_UP]) * 4)
+
+    if hit(1):
+        player.topleft = (T + 8, T + 8)
+
+    if hit(2):
+        lvl += 1
+        if lvl == len(levels):
+            screen.fill((255,255,255))
+            screen.blit(font.render("YOU WIN!", True, (0,200,0)), (300, 260))
+            pygame.display.flip()
+            pygame.time.wait(2000)
+            pygame.quit()
+            sys.exit()
+        maze = levels[lvl]
+        player.topleft = (T + 8, T + 8)
+
+    screen.fill((255,255,255))
+    for r in range(len(maze)):
+        for c in range(len(maze[0])):
+            if maze[r][c] == 1:
+                pygame.draw.rect(screen, (0,0,0), (c*T, r*T, T, T))
+            if maze[r][c] == 2:
+                pygame.draw.rect(screen, (0,200,0), (c*T, r*T, T, T))
+
+    pygame.draw.rect(screen, (50,50,255), player)
+    screen.blit(font.render("Level " + str(lvl + 1), True, (0,0,0)), (10,10))
+
+    for i in range(len(levels)):
+        y = 80 + i * (IND_SIZE + IND_GAP)
+        if i < lvl:
+            pygame.draw.rect(screen, (0,200,0), (SIDEBAR_X, y, IND_SIZE, IND_SIZE))
+        elif i == lvl:
+            pygame.draw.rect(screen, (50,50,255), (SIDEBAR_X, y, IND_SIZE, IND_SIZE), 3)
+        else:
+            pygame.draw.rect(screen, (180,180,180), (SIDEBAR_X, y, IND_SIZE, IND_SIZE), 2)
+
+        n = font.render(str(i + 1), True, (0,0,0))
+        screen.blit(n, n.get_rect(center=(SIDEBAR_X + IND_SIZE // 2, y + IND_SIZE // 2)))
+
+    pygame.display.flip()
