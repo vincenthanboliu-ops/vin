@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>my learning of how to code</title>
+
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            font-family: Arial;
+        }
+    </style>
+</head>
+
+<body>
+
+<h1>my projects with Coding is Fun(CIF)</h1>
+
+<h3>virtual shop creation</h3>
+<ul>
+    <li>updated virtual shop</li>
+    <li>learned to use github and write on medium</li>
+    <li>set up python in our computers</li>
+</ul>
+
+<h3>number guessing game</h3>
+<ul>
+    <li>created simple game</li>
+    <li>learned flowcharts</li>
+</ul>
+
+<h3>way better guessing game</h3>
+<ul>
+    <li>added hints</li>
+    <li>added retries</li>
+    <li>added a fixed number range</li>
+    <li>added live counter</li>
+</ul>
+
+<h3>makeing and learning about tbag</h3>
+<ul>
+    <li>wrote instructions</li>
+    <li>made flowcharts to resemble tbag</li>
+</ul>
+
+<h3>pygame basics</h3>
+<ul>
+    <li>learned coordinates</li>
+    <li>understood movement</li>
+</ul>
+
+<h3>controllable box</h3>
+<ul>
+    <li>used keyboard input</li>
+    <li>moved object on screen</li>
+</ul>
+
+<h3>maze game</h3>
+<ul>
+    <li>added walls and goal</li>
+    <li>created win and lose system</li>
+</ul>
+
+<h3>distance sensor</h3>
+<ul>
+    <li>used arduino</li>
+    <li>measured distance</li>
+</ul>
+
+<h3>motion sensor</h3>
+<ul>
+    <li>detected movement</li>
+    <li>used infrared sensor</li>
+</ul>
+
+<h3>html basics (presemt)</h3>
+<ul>
+    <li>learned basic tags</li>
+    <li>built simple webpage</li>
+</ul>
+
+</body>
+</html>
